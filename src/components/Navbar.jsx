@@ -33,16 +33,22 @@ const Navbar = () => {
             </div>
           {/* Hamburger menu button for mobile and tablet views */}
           <div className='md:hidden'>
-            <button onClick={toggleMenu} className='focus:outline-none'>
-              {!isOpen && (
-                <button onClick={toggleMenu} className='focus:outline-none mx-4'>
-                  {/* Hamburger icon when menu is closed */}
-                  <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 6h16M4 12h16m-7 6h7' />
-                  </svg>
-                </button>
-              )}
-            </button>
+          <button onClick={toggleMenu} className='focus:outline-none'>
+      {!isOpen && (
+        <div className='focus:outline-none mx-4'>
+          {/* Hamburger icon when menu is closed */}
+          <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 6h16M4 12h16m-7 6h7' />
+          </svg>
+        </div>
+      )}
+      {isOpen && (
+        <div className='focus:outline-none mx-4'>
+          {/* Icon or content when menu is open */}
+          {/* Replace this with the appropriate content for when the menu is open */}
+        </div>
+      )}
+    </button>
           </div>
           {/* Regular navigation for laptop view */}
           <div className='hidden md:flex items-center gap-7 justify-center'>
