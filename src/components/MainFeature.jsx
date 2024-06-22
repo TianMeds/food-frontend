@@ -10,7 +10,7 @@ const MainFeature = () => {
         },
         {
             productImage: 'https://raw.githubusercontent.com/TianMeds/image--stocks-for-coding/main/G%20%26%20R%20Logo.png',
-            productName: 'G & R Sisig',
+            productName: 'G & R Chicken',
             productPrice: '₱90.00',
         },
 
