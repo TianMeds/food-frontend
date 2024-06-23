@@ -1,6 +1,16 @@
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
+import { FaFilter } from 'react-icons/fa';
 
 const MenuPart = () => {
+  const [searchInput, setSearchInput] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false); // State for dropdown visibility
+  const [filters, setFilters] = useState({
+    sizzling: true,
+    nonSizzling: true,
+  });
+
   const products = [
     {
       productImage: "https://raw.githubusercontent.com/TianMeds/image--stocks-for-coding/main/image_2024-06-22_235538456.png",
@@ -271,100 +281,156 @@ const MenuPart = () => {
     return 0;
   });
 
+  const filteredSizzlingProducts = sortedProducts.filter(product =>
+    product.productName.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
+  const filteredNonSizzlingProducts = nonSizzlingProductsFirstBestSellers.filter(product =>
+    product.productName.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
+  const toggleFilter = (filterName) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: !prevFilters[filterName],
+    }));
+  };
+
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-semibold mb-6">Our Menu</h1>
   
-      <div className="flex items-center gap-8 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-8 relative">
         {/* Search bar */}
         <input
           type="text"
           placeholder="Search"
-          className="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          className="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500 flex-grow"
         />
+        {/* Filter button */}
+        <button
+          className="p-2 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none"
+          onClick={() => setShowDropdown(!showDropdown)}
+        >
+          <FaFilter className="text-gray-600" />
+        </button>
+        {/* Dropdown with checkboxes */}
+        {showDropdown && (
+          <div className="absolute top-full mt-2 right-0 bg-white border border-gray-300 rounded-lg shadow-lg p-4 z-10">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="sizzling"
+                checked={filters.sizzling}
+                onChange={() => toggleFilter('sizzling')}
+                className="mr-2"
+              />
+              <label htmlFor="sizzling" className="text-gray-700">Sizzling Menu</label>
+            </div>
+            <div className="flex items-center mt-2">
+              <input
+                type="checkbox"
+                id="nonSizzling"
+                checked={filters.nonSizzling}
+                onChange={() => toggleFilter('nonSizzling')}
+                className="mr-2"
+              />
+              <label htmlFor="nonSizzling" className="text-gray-700">Non-Sizzling Menu</label>
+            </div>
+          </div>
+        )}
       </div>
   
-      <h2 className="text-2xl font-semibold mb-4">Sizzling Menu</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-        {sortedProducts.map((product, index) => (
-          <div key={index} className="bg-white border border-gray-800 rounded-lg shadow flex flex-col">
-            <div className="flex-grow">
-              <a href="#">
-                <img className="w-full max-h-40 object-cover rounded-t-lg" src={product.productImage} alt={product.productName} />
-              </a>
-            </div>
-            <div className="p-4 flex flex-col justify-between">
-              <div>
-                <h3 className="text-lg font-semibold mb-2">{product.productName}</h3>
-                <p className="text-sm text-gray-600 mb-2">{product.productDescription}</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <div>
-                  {product.bestSeller && (
-                    <span className="bg-yellow-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full">
-                      Best Seller
-                    </span>
-                  )}
-                  {product.new && (
-                    <span className="bg-green-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
-                      New
-                    </span>
-                  )}
-                  {product.original && (
-                    <span className="bg-gray-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
-                      Originals
-                    </span>
-                  )}
+      {filters.sizzling && filteredSizzlingProducts.length > 0 && (
+        <>
+          <h2 className="text-2xl font-semibold mb-4">Sizzling Menu</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            {filteredSizzlingProducts.map((product, index) => (
+              <div key={index} className="bg-white border border-gray-800 rounded-lg shadow flex flex-col">
+                <div className="flex-grow">
+                  <a href="#">
+                    <img className="w-full max-h-40 object-cover rounded-t-lg" src={product.productImage} alt={product.productName} />
+                  </a>
                 </div>
-                <div className="text-xl font-bold text-right">{product.productPrice}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-
-
-      <h2 className="text-2xl font-semibold mb-4">Non-Sizzling Menu</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-        {nonSizzlingProductsFirstBestSellers.map((product, index) => (
-          <div key={index} className="bg-white border border-gray-800 rounded-lg shadow flex flex-col">
-            <div className="flex-grow">
-              <a href="#">
-                <img className="w-full max-h-40 object-cover rounded-t-lg" src={product.productImage} alt={product.productName} />
-              </a>
-            </div>
-            <div className="p-4 flex flex-col justify-between">
-              <div>
-                <h3 className="text-lg font-semibold mb-2">{product.productName}</h3>
-                <p className="text-sm text-gray-600 mb-2">{product.productDescription}</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <div>
-                  {product.bestSeller && (
-                    <span className="bg-yellow-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full">
-                      Best Seller
-                    </span>
-                  )}
-                  {product.new && (
-                    <span className="bg-green-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
-                      New
-                    </span>
-                  )}
-                  {product.original && (
-                    <span className="bg-gray-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
-                      Originals
-                    </span>
-                  )}
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">{product.productName}</h3>
+                    <p className="text-sm text-gray-600 mb-2">{product.productDescription}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      {product.bestSeller && (
+                        <span className="bg-yellow-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full">
+                          Best Seller
+                        </span>
+                      )}
+                      {product.new && (
+                        <span className="bg-green-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
+                          New
+                        </span>
+                      )}
+                      {product.original && (
+                        <span className="bg-gray-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
+                          Originals
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-xl font-bold text-right">{product.productPrice}</div>
+                  </div>
                 </div>
-                <div className="text-lg font-bold text-right">{product.productPrice}</div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
 
+
+
+{filters.nonSizzling && filteredNonSizzlingProducts.length > 0 && (
+        <>
+          <h2 className="text-2xl font-semibold mb-4">Non-Sizzling Menu</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            {filteredNonSizzlingProducts.map((product, index) => (
+              <div key={index} className="bg-white border border-gray-800 rounded-lg shadow flex flex-col">
+                <div className="flex-grow">
+                  <a href="#">
+                    <img className="w-full max-h-40 object-cover rounded-t-lg" src={product.productImage} alt={product.productName} />
+                  </a>
+                </div>
+                <div className="p-4 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">{product.productName}</h3>
+                    <p className="text-sm text-gray-600 mb-2">{product.productDescription}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      {product.bestSeller && (
+                        <span className="bg-yellow-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full">
+                          Best Seller
+                        </span>
+                      )}
+                      {product.new && (
+                        <span className="bg-green-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
+                          New
+                        </span>
+                      )}
+                      {product.original && (
+                        <span className="bg-gray-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
+                          Originals
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-lg font-bold text-right">{product.productPrice}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
   
