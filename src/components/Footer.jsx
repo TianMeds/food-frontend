@@ -8,8 +8,8 @@ const Footer = () => {
     <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="flex justify-between flex-wrap md:flex-nowrap">
             <div className="w-full md:w-1/4 mb-6 md:mb-0 mr-5">
-                <a href="https://www.facebook.com/ReneGraceEatery" class="flex items-center mb-4">
-                    <img src="https://raw.githubusercontent.com/TianMeds/image--stocks-for-coding/main/G%20%26%20R%20Logo.png" class="h-20 me-3" alt="G & R Eatery Logo" />
+                <a href="https://www.facebook.com/ReneGraceEatery" className="flex items-center mb-4">
+                    <img src="https://raw.githubusercontent.com/TianMeds/image--stocks-for-coding/main/G%20%26%20R%20Logo.png" className="h-20 me-3" alt="G & R Eatery Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">G & R Eatery</span>
                 </a>
                 <p className="text-gray-500 dark:text-gray-400">G & R Eatery, based in Makati City, has been serving high-quality local cuisine to Filipinos for over five years. We are committed to delivering delicious, authentic dishes that satisfy our customers.</p>
@@ -18,7 +18,7 @@ const Footer = () => {
                 <h6 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">Quick Links</h6>
                 <ul className="text-gray-500 dark:text-gray-400">
                     <li className="mb-2">
-                        <a href="https://www.facebook.com/ReneGraceEatery" class="flex items-center hover:underline">
+                        <a href="https://www.facebook.com/ReneGraceEatery" className="flex items-center hover:underline">
                             <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
                                 <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
                             </svg>
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-center">
-            <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400 ">© 2024 <a href="https://www.facebook.com/ReneGraceEatery" class="hover:underline">G & R Eatery</a></span>
+            <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400 ">© 2024 <a href="https://www.facebook.com/ReneGraceEatery" className="hover:underline">G & R Eatery</a></span>
         </div>
     </div>
 </footer>
