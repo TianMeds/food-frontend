@@ -1,66 +1,76 @@
-'use client'
-import { useState } from 'react';
+'use client';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 const ScrollingImage = ({ images }) => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [slider, setSlider] = useState(0);
+    const delay = 2500;
+    const timeoutRef = useRef(null);
 
-    const nextImage = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
-    };
+    function resetTimeout() {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+    }
 
-    const prevImage = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
-    };
+    useEffect(() => {
+        resetTimeout();
+        timeoutRef.current = setTimeout(
+            () =>
+                setSlider((prevIndex) =>
+                    prevIndex === images.length - 1 ? 0 : prevIndex + 1
+                ),
+            delay
+        );
 
-    const handleDotClick = (index) => {
-        setCurrentImageIndex(index);
-    };
+        return () => {
+            resetTimeout();
+        };
+    }, [slider, images.length]);
 
     return (
-<div className="relative overflow-hidden w-full max-w-screen-lg mx-auto">
-    <div className="flex justify-center items-center h-72 md:h-96 relative">
-        {images.map((image, index) => (
-            <div
-                key={index}
-                className={`absolute w-full h-full transform transition-transform duration-500 ${
-                    index !== 0 ? 'opacity-0 scale-100' : '' // Apply animation to images other than the first one
-                } ${
-                    index === currentImageIndex ? 'opacity-100 scale-100' : ''
-                }`}
-                style={{
-                    transform: `translateX(-${(currentImageIndex - index) * 100}%)`, // Adjusted translation
-                }}
-            >
-                <Image src={image.src} alt={image.alt} layout="fill" objectFit="cover" />
+        <div className="relative w-full overflow-hidden">
+            {/* Conditionally render for mobile view */}
+            <div className="sm:hidden text-center pt-8 px-4 pb">
+                <h1 className="text-3xl font-bold mb-4">G & R Eatery</h1>
+                <p className="text-gray-700 text-lg">
+                    Enjoy our delicious dishes and experience the taste of home!
+                </p>
             </div>
-        ))}
-    </div>
-    <div className="absolute inset-y-0 left-0 flex items-center">
-        <button onClick={prevImage} className="text-white focus:outline-none bg-gray-800 rounded-full p-2">
-            &lt;
-        </button>
-    </div>
-    <div className="absolute inset-y-0 right-0 flex items-center">
-        <button onClick={nextImage} className="text-white focus:outline-none bg-gray-800 rounded-full p-2">
-            &gt;
-        </button>
-    </div>
-    <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
-        {images.map((_, index) => (
-            <button
-                key={index}
-                onClick={() => handleDotClick(index)}
-                className={`w-2 h-2 rounded-full ${
-                    index === currentImageIndex ? 'bg-white' : 'bg-gray-400'
-                } focus:outline-none`}
-            ></button>
-        ))}
-    </div>
-</div>
 
+            {/* Conditionally render for desktop view */}
+            <div className="hidden sm:block">
+                <div
+                    className="flex transition-transform ease-linear duration-1000"
+                    style={{ transform: `translate3d(${-slider * 100}%, 0, 0)` }}
+                >
+                    {images.map((image, index) => (
+                        <div key={index} className="w-full flex-shrink-0 relative" style={{ height: '600px' }}>
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                layout="fill"
+                                objectFit="cover"
+                                className="w-full h-full"
+                            />
+                        </div>
+                    ))}
+                </div>
+        <br/><br/>
+                <div className="absolute bottom-0 w-full flex justify-center mb-4">
+                    {images.map((_, idx) => (
+                        <div
+                            key={idx}
+                            className={`cursor-pointer mx-1 rounded-full w-3 h-3 bg-gray-400 ${slider === idx ? 'bg-gray-800' : ''}`}
+                            onClick={() => {
+                                setSlider(idx);
+                            }}
+                        ></div>
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 };
-
 
 export default ScrollingImage;

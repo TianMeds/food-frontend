@@ -31,10 +31,17 @@ const MainFeature = () => {
 
         <div className="container mx-auto px-4 py-8">
             
-            <div className="flex items-center justify-between gap-8 mb-8">
-                <h1 className="text-3xl font-semibold mb-6">Best Seller</h1>
-                <a href="#" className="text-blue-700 hover:underline dark:text-blue-400">View all</a>
+        <div className="flex flex-col sm:flex-row justify-between gap-8 mb-8">
+            <div className="sm:w-auto w-full">
+                <p className="text-3xl font-semibold mb-2 sm:mb-0">Best Seller</p>
+                <p className="text-sm text-gray-500 sm:hidden">We have prepared the best food for you</p>
             </div>
+            <a href="/menu" className="text-white bg-blue-700 hover:bg-blue-600 dark:bg-blue-400 dark:hover:bg-blue-300 py-2 px-4 rounded-lg ml-auto ">
+                View all
+            </a>
+        </div>
+
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
                 {featureSection.map((product, index) => (
                 <div key={index} className="bg-white border border-gray-800 rounded-lg shadow flex flex-col">

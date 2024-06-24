@@ -1,7 +1,6 @@
 import Navbar from "../../components/Navbar"
 import ScrollingImage from "../../components/ScrollingImage"
 import MainFeature from "../../components/MainFeature"
-import AboutUs from "../../components/AboutUs"
 import Footer from "../../components/Footer"
 import Sisig from '../assets/G&R_Sisig_Slider.svg'
 import Catering from '../assets/G&R_Catering.svg'
@@ -18,10 +17,8 @@ const HomePage = () => {
             { src: HaloHalo, alt: 'Image 3' },
         ]}
     />
-
-    <br/> <br/> <br/> 
+    <br/> <br/>
     <MainFeature />
-    <AboutUs/>
 
     <Footer/>
     </>
