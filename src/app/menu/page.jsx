@@ -7,6 +7,7 @@ const MenuPage = () => {
   return (
     <div>
       <Navbar/>
+      <br/> <br/><br/> <br/>
       <MenuPart/>
       <Footer/>
     </div>

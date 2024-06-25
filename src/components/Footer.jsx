@@ -12,7 +12,7 @@ const Footer = () => {
                     <img src="https://raw.githubusercontent.com/TianMeds/image--stocks-for-coding/main/G%20%26%20R%20Logo.png" className="h-20 me-3" alt="G & R Eatery Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">G & R Eatery</span>
                 </a>
-                <p className="text-gray-500 dark:text-gray-400">G & R Eatery, based in Makati City, has been serving high-quality local cuisine to Filipinos for over five years. We are committed to delivering delicious, authentic dishes that satisfy our customers.</p>
+                <p className="text-gray-500 dark:text-gray-400">G & R Eatery, based in Makati City, has been serving high-quality local cuisine to Filipinos for over seven years. We are committed to delivering delicious, authentic dishes that satisfy our customers.</p>
             </div>
             <div className="w-full md:w-1/3 mb-6 md:mb-0">
                 <h6 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">Quick Links</h6>

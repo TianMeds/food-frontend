@@ -6,6 +6,7 @@ const BookingPage = () => {
   return (
     <div>
       <Navbar/>
+      <br/> <br/><br/> <br/>
       <BookPart/>
       <Footer/>
     </div>

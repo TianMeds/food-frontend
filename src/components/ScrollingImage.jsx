@@ -56,12 +56,12 @@ const ScrollingImage = ({ images }) => {
                         </div>
                     ))}
                 </div>
-        <br/><br/>
+
                 <div className="absolute bottom-0 w-full flex justify-center mb-4">
                     {images.map((_, idx) => (
                         <div
                             key={idx}
-                            className={`cursor-pointer mx-1 rounded-full w-3 h-3 bg-gray-400 ${slider === idx ? 'bg-gray-800' : ''}`}
+                            className={`cursor-pointer mx-1 rounded-full w-3 h-3 ${slider === idx ? (idx === 0 ? 'bg-white' : 'bg-gray-800') : 'bg-gray-400'}`}
                             onClick={() => {
                                 setSlider(idx);
                             }}

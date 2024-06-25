@@ -1,16 +1,16 @@
 import Navbar from "../../components/Navbar"
-import OrderNow from "../../components/OrderNow"
+import OrderList from "../../components/OrderList"
 import Footer from '../../components/Footer'
 
-const OrderPage = () => {
+const OrderListPage = () => {
   return (
     <div>
       <Navbar/>
       <br/> <br/><br/> <br/>
-      <OrderNow/>
+      <OrderList/>
       <Footer/>
     </div>
   )
 }
 
-export default OrderPage
+export default OrderListPage

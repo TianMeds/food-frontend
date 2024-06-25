@@ -6,6 +6,7 @@ const AboutPage = () => {
   return (
     <div>
       <Navbar/>
+      <br/> <br/><br/> <br/>
       <AboutPart/>
       <Footer/>
     </div>

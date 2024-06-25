@@ -10,6 +10,7 @@ const HomePage = () => {
   return (
     <>
     <Navbar />
+    <br/> <br/>     <br/>
     <ScrollingImage 
         images={[
             { src: Sisig, alt: 'Image 1' },
@@ -17,7 +18,7 @@ const HomePage = () => {
             { src: HaloHalo, alt: 'Image 3' },
         ]}
     />
-    <br/> <br/>
+    <br/> 
     <MainFeature />
 
     <Footer/>
