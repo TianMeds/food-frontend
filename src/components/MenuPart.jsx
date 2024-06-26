@@ -353,13 +353,15 @@
                   key={index}
                   className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center"
                 >
-                  <img
-                    src={product.productImage}
-                    alt={product.productName}
-                    className="w-full h-48 object-cover mb-4 rounded-md"
-                  />
+                  <div className="w-full h-48 mb-4">
+                    <img
+                      src={product.productImage}
+                      alt={product.productName}
+                      className="w-full h-full object-cover rounded-md"
+                    />
+                  </div>
 
-                  <div className="p-4 flex flex-col justify-between">
+                  <div className="p-4 flex flex-col justify-between w-full">
                     <div>
                       <h3 className="text-lg font-semibold mb-2">{product.productName}</h3>
                       <p className="text-sm text-gray-600 mb-2">{product.productDescription}</p>
@@ -391,48 +393,56 @@
           </>
         )}
 
-        {filters.nonSizzling && filteredNonSizzlingProducts.length > 0 && (
-          <>
-            <h2 className="text-2xl font-semibold mb-4">Non-Sizzling Menu</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {filteredNonSizzlingProducts.map((product, index) => (
-                <div key={index} className="bg-white border border-gray-800 rounded-lg shadow flex flex-col">
-                  <div className="flex-grow">
-                    <a href="#">
-                      <img className="w-full max-h-40 object-cover rounded-t-lg" src={product.productImage} alt={product.productName} />
-                    </a>
-                  </div>
-                  <div className="p-4 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">{product.productName}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{product.productDescription}</p>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div>
-                        {product.bestSeller && (
-                          <span className="bg-yellow-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full">
-                            Best Seller
-                          </span>
-                        )}
-                        {product.new && (
-                          <span className="bg-green-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
-                            New
-                          </span>
-                        )}
-                        {product.original && (
-                          <span className="bg-gray-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
-                            Originals
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-lg font-bold text-right">{product.productPrice}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+
+{filters.nonSizzling && filteredNonSizzlingProducts.length > 0 && (
+  <>
+    <h2 className="text-2xl font-semibold mb-4">Non-Sizzling Menu</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      {filteredNonSizzlingProducts.map((product, index) => (
+        <div
+          key={index}
+          className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center"
+        >
+          <div className="w-full h-48 mb-4">
+            <img
+              src={product.productImage}
+              alt={product.productName}
+              className="w-full h-full object-cover rounded-md"
+            />
+          </div>
+
+          <div className="p-4 flex flex-col justify-between w-full">
+            <div>
+              <h3 className="text-lg font-semibold mb-2">{product.productName}</h3>
+              <p className="text-sm text-gray-600 mb-2">{product.productDescription}</p>
             </div>
-          </>
-        )}
+            <div className="flex justify-between items-center">
+              <div>
+                {product.bestSeller && (
+                  <span className="bg-yellow-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full">
+                    Best Seller
+                  </span>
+                )}
+                {product.new && (
+                  <span className="bg-green-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
+                    New
+                  </span>
+                )}
+                {product.original && (
+                  <span className="bg-gray-400 text-xs font-semibold text-gray-800 py-1 px-2 rounded-full ml-2">
+                    Originals
+                  </span>
+                )}
+              </div>
+              <div className="text-xl font-bold text-right">{product.productPrice}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>
+)}
+
 
       </div>
     );
